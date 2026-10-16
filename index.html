@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d9ecff">
+  <title>Pigeon Space — Un piccolo angolo di piccioni</title>
+  <style>
+    :root { color-scheme: light; --ink:#17283c; --blue:#83b9e8; --cream:#fff7e7; --pink:#f5a9a1; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; overflow-x:hidden; font-family: ui-rounded, "Trebuchet MS", system-ui, sans-serif; color:var(--ink); background:linear-gradient(#d9ecff 0 58%,#f9e6c8 58%); }
+    header { position:relative; z-index:2; max-width:1100px; padding:26px 28px; margin:auto; display:flex; align-items:center; justify-content:space-between; }
+    .brand { font-weight:900; letter-spacing:.08em; font-size:1rem; }
+    .brand span { color:#3b79ad; }
+    .badge { background:#fff9; border:1px solid #fff; padding:9px 14px; border-radius:99px; font-size:.8rem; font-weight:700; }
+    main { min-height:calc(100vh - 85px); display:grid; place-items:center; padding:20px; }
+    .hero { z-index:1; text-align:center; width:min(760px,100%); padding:45px 28px 38px; background:#fff9; border:1px solid #ffffffb8; border-radius:32px; box-shadow:0 24px 70px #507ba52b; backdrop-filter:blur(10px); }
+    .eyebrow { color:#447da8; font-size:.78rem; text-transform:uppercase; letter-spacing:.18em; font-weight:900; }
+    h1 { margin:12px 0 10px; font-size:clamp(3.3rem,11vw,7.8rem); line-height:.88; letter-spacing:-.09em; }
+    h1 span { color:#4a89bc; }
+    .intro { max-width:450px; margin:20px auto 25px; font-size:1.08rem; line-height:1.6; color:#41566b; }
+    .actions { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    button { border:0; border-radius:99px; padding:14px 20px; background:#203c58; color:white; font:inherit; font-weight:800; cursor:pointer; box-shadow:0 7px 18px #203c5830; transition:transform .2s,background .2s; }
+    button:hover { transform:translateY(-3px); background:#315f87; }
+    button.secondary { background:#fff; color:#203c58; }
+    .count { margin:20px 0 0; font-size:.85rem; color:#60758a; font-weight:700; }
+    .flock { position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+    .bird { position:absolute; font-size:clamp(1.35rem,3.2vw,2.5rem); filter:drop-shadow(0 4px 4px #455c7025); animation:float var(--time,8s) ease-in-out infinite; animation-delay:var(--delay,0s); opacity:.9; }
+    .bird:nth-child(1){left:5%;top:23%;--time:7s}.bird:nth-child(2){left:18%;top:75%;--time:9s}.bird:nth-child(3){left:83%;top:22%;--time:8s}.bird:nth-child(4){left:91%;top:69%;--time:10s}.bird:nth-child(5){left:70%;top:12%;--time:7.5s}.bird:nth-child(6){left:29%;top:15%;--time:8.5s}.bird:nth-child(7){left:9%;top:53%;--time:11s}.bird:nth-child(8){left:77%;top:82%;--time:9s}.bird:nth-child(9){left:44%;top:7%;--time:8s}.bird:nth-child(10){left:58%;top:91%;--time:10s}.bird:nth-child(11){left:35%;top:88%;--time:7s}.bird:nth-child(12){left:96%;top:43%;--time:9s}.bird:nth-child(13){left:2%;top:83%;--time:8s}.bird:nth-child(14){left:64%;top:74%;--time:11s}.bird:nth-child(15){left:24%;top:42%;--time:9s}.bird:nth-child(16){left:87%;top:5%;--time:7s}.bird:nth-child(17){left:51%;top:17%;--time:10s}.bird:nth-child(18){left:13%;top:8%;--time:8s}.bird:nth-child(19){left:73%;top:48%;--time:9s}.bird:nth-child(20){left:40%;top:78%;--time:7.5s}
+    @keyframes float { 0%,100%{transform:translate(0,0) rotate(-8deg)} 50%{transform:translate(13px,-20px) rotate(7deg)} }
+    .city { position:fixed; z-index:0; bottom:0; left:0; right:0; height:22vh; min-height:120px; display:flex; align-items:end; gap:5px; opacity:.42; pointer-events:none; }
+    .building { flex:1; background:#b3c6d2; border-radius:8px 8px 0 0; min-width:24px; height:var(--h); position:relative; }
+    .building:after { content:""; position:absolute; inset:14px 8px; background:repeating-linear-gradient(90deg,transparent 0 12px,#f8f2dd 12px 17px),repeating-linear-gradient(0deg,transparent 0 18px,#f8f2dd 18px 23px); opacity:.8; }
+    .toast { position:fixed; left:50%; bottom:26px; z-index:5; transform:translate(-50%,20px); opacity:0; transition:.25s; background:#203c58; color:white; border-radius:99px; padding:11px 17px; font-weight:800; box-shadow:0 8px 24px #10284038; white-space:nowrap; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media(max-width:560px){ header{padding:20px 18px}.hero{padding:38px 18px;border-radius:24px}.bird:nth-child(n+13){display:none}.intro{font-size:1rem} }
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header><div class="brand">PIGEON <span>SPACE</span></div><div class="badge">🐦 Club dei piccioni</div></header>
+  <div class="flock" aria-hidden="true">
+    <span class="bird">🐦</span><span class="bird">🕊️</span><span class="bird">🐦</span><span class="bird">🐦‍⬛</span><span class="bird">🕊️</span>
+    <span class="bird">🐦</span><span class="bird">🕊️</span><span class="bird">🐦‍⬛</span><span class="bird">🐦</span><span class="bird">🕊️</span>
+    <span class="bird">🐦‍⬛</span><span class="bird">🐦</span><span class="bird">🕊️</span><span class="bird">🐦</span><span class="bird">🐦‍⬛</span>
+    <span class="bird">🕊️</span><span class="bird">🐦</span><span class="bird">🐦‍⬛</span><span class="bird">🕊️</span><span class="bird">🐦</span>
+  </div>
+  <div class="city" aria-hidden="true"><div class="building" style="--h:42%"></div><div class="building" style="--h:68%"></div><div class="building" style="--h:51%"></div><div class="building" style="--h:82%"></div><div class="building" style="--h:57%"></div><div class="building" style="--h:73%"></div><div class="building" style="--h:46%"></div><div class="building" style="--h:62%"></div><div class="building" style="--h:88%"></div><div class="building" style="--h:54%"></div><div class="building" style="--h:70%"></div><div class="building" style="--h:43%"></div></div>
+  <main><section class="hero">
+    <div class="eyebrow">Un piccolo angolo di città</div>
+    <h1>PIGEON<br><span>SPACE</span></h1>
+    <p class="intro">Piccioni in volo, piccioni in pausa, piccioni con grandi idee. Qui c'è sempre posto per un altro piccione. 🪶</p>
+    <div class="actions"><button id="coo">Fai un “gru gru” 🐦</button><button class="secondary" id="release">Libera altri piccioni ✨</button></div>
+    <p class="count" id="count">Piccioni in servizio: 20</p>
+  </section></main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    let flockSize = 20;
+    const count = document.getElementById('count');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function message(text){ toast.textContent=text; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>toast.classList.remove('show'),1700); }
+    document.getElementById('coo').addEventListener('click',()=>message('GRU GRU! Risposta ricevuta dal tetto 🐦'));
+    document.getElementById('release').addEventListener('click',()=>{
+      const flock=document.querySelector('.flock');
+      for(let i=0;i<5;i++){
+        const bird=document.createElement('span'); bird.className='bird'; bird.textContent=['🐦','🕊️','🐦‍⬛'][Math.floor(Math.random()*3)];
+        bird.style.left=Math.round(Math.random()*92)+'%'; bird.style.top=Math.round(8+Math.random()*78)+'%'; bird.style.setProperty('--time',(6+Math.random()*6)+'s'); bird.style.setProperty('--delay',(-Math.random()*5)+'s'); flock.appendChild(bird);
+      }
+      flockSize+=5; count.textContent='Piccioni in servizio: '+flockSize; message('Cinque nuovi piccioni sono arrivati! 🐦');
+    });
+  </script>
+</body>
+</html>
